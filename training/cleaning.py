@@ -8,6 +8,7 @@ from geopy.geocoders import Nominatim
 import time
 import geopandas as gpd
 from shapely.geometry import Point
+import os
 
 url = "https://raw.githubusercontent.com/Amina212004/MINI_PROJET_ML/data_branch/data/dataset.csv"
 token = "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"  
@@ -161,5 +162,8 @@ df_final = df_clean[[
     'reclat', 
     'reclong'
 ]].copy()
+
+os.makedirs("data", exist_ok=True)  # crée le dossier si absent
+df_final.to_csv("data/meteorites_final.csv", index=False)
 
 df_final.to_csv("data/meteorites_final.csv", index=False)
