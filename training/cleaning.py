@@ -150,15 +150,16 @@ df_clean['recclass_clean'] = df_clean['recclass_clean'].apply(lambda x: 'OTHER' 
 #  Dataset final pour règles
 # -----------------------------
 df_final = df_clean[[
-    'name',           # nom de la météorite, pour affichage
-    'year_period',    # critère utilisateur pour époque
-    'continent',      # critère utilisateur pour continent
-    'country',        # info supplémentaire pour affichage 
-    'mass_bin',       # critère utilisateur pour taille
-    'recclass_clean', # cible pour règles d'association (type de météorite)
-    'fall',           # info supplémentaire pour affichage (Found/Fell)
-    'reclat',         # latitude pour la carte
-    'reclong'         # longitude pour la carte
+    'name', 
+    'year',             # ajout de l'année numérique
+    'year_period', 
+    'continent', 
+    'country',
+    'mass_cleaned',     # ajout de la masse nettoyée
+    'mass_bin', 
+    'recclass_clean', 
+    'reclat', 
+    'reclong'
 ]].copy()
 
 df_final.to_csv("data/meteorites_final.csv", index=False)
