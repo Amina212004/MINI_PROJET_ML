@@ -165,5 +165,3 @@ df_final = df_clean[[
 
 os.makedirs("data", exist_ok=True)  # crée le dossier si absent
 df_final.to_csv("data/meteorites_final.csv", index=False)
-
-df_final.to_csv("data/meteorites_final.csv", index=False)
