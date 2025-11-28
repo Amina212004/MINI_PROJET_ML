@@ -112,30 +112,81 @@ def clean_recclass(recclass):
     if pd.isna(recclass):
         return "UNKNOWN"
     rec = str(recclass).strip().upper()
-    
-    if "L6" in rec: return "L6"
-    if "L5" in rec: return "L5"
-    if "L" in rec or "LL" in rec: return "L-OTHER"
-    if "H5" in rec: return "H5"
-    if "H6" in rec: return "H6"
-    if "H4" in rec: return "H4"
-    if "H" in rec: return "H-OTHER"
-    if "LL" in rec: return "LL"
-    if "CM" in rec or "CARBONACEOUS" in rec or rec.startswith("C"): return "CARBONACEOUS"
-    if "IRON" in rec or "IIAB" in rec or "IIIAB" in rec: return "IRON"
-    if "CHONDRITE" in rec or "STONY" in rec or rec.endswith("ITE"): return "CHONDRITE"
-    if "ACHONDRITE" in rec or "EUCRITE" in rec: return "ACHONDRITE"
-    if "MESOSIDERITE" in rec: return "MESOSIDERITE"
-    if "PALLASITE" in rec or "PALASITE" in rec: return "PALLASITE"
+
+    # -------------------------
+    # GROUPE H (plus détaillé)
+    # -------------------------
+    for h in ["H3", "H4", "H5", "H6", "H7"]:
+        if h in rec:
+            return h
+    if rec.startswith("H"):
+        return "H-OTHER"
+
+    # -------------------------
+    # GROUPE L
+    # -------------------------
+    for l in ["L3", "L4", "L5", "L6"]:
+        if l in rec:
+            return l
+    if rec.startswith("L") and not rec.startswith("LL"):
+        return "L-OTHER"
+
+    # -------------------------
+    # GROUPE LL
+    # -------------------------
+    for ll in ["LL3", "LL4", "LL5", "LL6"]:
+        if ll in rec:
+            return ll
+    if rec.startswith("LL"):
+        return "LL-OTHER"
+
+    # -------------------------
+    # CHONDRITES CARBONÉES
+    # -------------------------
+    carbonaceous_prefixes = ["CI", "CM", "CK", "CV", "CO", "CR", "CB"]
+    for prefix in carbonaceous_prefixes:
+        if rec.startswith(prefix):
+            return "CARBONACEOUS"
+
+    # -------------------------
+    # IRONS (métalliques)
+    # -------------------------
+    if "IRON" in rec or rec.startswith(("IAB", "II", "III", "IVA", "IVB")):
+        return "IRON"
+
+    # -------------------------
+    # ACHONDRITES
+    # -------------------------
+    achondrites = ["ACHONDRITE", "EUCRITE", "HOWARDITE", "DIOGENITE", "AUBRITE", "UREILITE"]
+    for a in achondrites:
+        if a in rec:
+            return "ACHONDRITE"
+
+    # -------------------------
+    # PALLASITE / MESOSIDERITE
+    # -------------------------
+    if "PALLASITE" in rec:
+        return "PALLASITE"
+    if "MESOSIDERITE" in rec:
+        return "MESOSIDERITE"
+
+    # -------------------------
+    # CHONDRITE générique
+    # -------------------------
+    if "CHONDRITE" in rec or rec.endswith("ITE"):
+        return "CHONDRITE"
+
+    # -------------------------
+    # Si vraiment inconnu
+    # -------------------------
     return "OTHER"
 
 df["recclass_clean"] = df["recclass"].apply(clean_recclass)
 
-# -----------------------------
-#  Filtrage final
-# -----------------------------
+
 df_clean = df[
     (df["continent"] != "Unknown") &
+    (df["country"] != "Unknown") &
     (df["year_period"] != "Unknown") &
     (df["recclass_clean"] != "UNKNOWN") &
     (df["mass_bin"] != "Unknown")
@@ -148,18 +199,17 @@ rare_classes = counts[counts < threshold].index
 df_clean['recclass_clean'] = df_clean['recclass_clean'].apply(lambda x: 'OTHER' if x in rare_classes else x)
 
 # -----------------------------
-#  Dataset final pour règles
+# 1️⃣1️⃣ Dataset final pour règles
 # -----------------------------
 df_final = df_clean[[
-    'name', 
-    'year',             # ajout de l'année numérique
-    'year_period', 
-    'continent', 
+    'name',
+    'year_period',
+    'continent',
     'country',
-    'mass_cleaned',     # ajout de la masse nettoyée
-    'mass_bin', 
-    'recclass_clean', 
-    'reclat', 
+    'mass_bin',
+    'recclass_clean',
+    'fall',
+    'reclat',
     'reclong'
 ]].copy()
 
