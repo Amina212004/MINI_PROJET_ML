@@ -204,9 +204,11 @@ df_clean['recclass_clean'] = df_clean['recclass_clean'].apply(lambda x: 'OTHER' 
 df_final = df_clean[[
     'name',
     'year_period',
+    'year',
     'recclass',
     'continent',
     'country',
+    'mass_cleaned',
     'mass_bin',
     'recclass_clean',
     'fall',
