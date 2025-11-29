@@ -198,6 +198,16 @@ counts = df_clean['recclass_clean'].value_counts()
 rare_classes = counts[counts < threshold].index
 df_clean['recclass_clean'] = df_clean['recclass_clean'].apply(lambda x: 'OTHER' if x in rare_classes else x)
 
+#regroupper hemisphere
+df_clean['hemisphere'] = df_clean['reclat'].apply(lambda x: 'North' if x >= 0 else 'South')
+
+#regroupper longitude
+df_clean['longitude_zone'] = df_clean['reclong'].apply(lambda x: 'West' if x < 0 else 'East')
+
+#fusionner periode et continent pour plus de ralations
+df_clean['period_continent'] = df_clean['year_period'] + '_' + df_clean['continent']
+
+
 # -----------------------------
 # 1️⃣1️⃣ Dataset final pour règles
 # -----------------------------
@@ -213,8 +223,12 @@ df_final = df_clean[[
     'recclass_clean',
     'fall',
     'reclat',
-    'reclong'
-]].copy()
+    'hemisphere',
+    'reclong',
+    'longitude_zone',
+    'period_continent']
+].copy()
+
 
 os.makedirs("data", exist_ok=True)  # crée le dossier si absent
 df_final.to_csv("data/meteorites_final.csv", index=False)
