@@ -1,0 +1,8 @@
+# Ignorer les dossiers de checkpoint de Jupyter
+.ipynb_checkpoints/
+
+# Ignorer les fichiers temporaires spécifiques
+*~
+
+# Ignorer les fichiers de sauvegarde de script (votre problème actuel)
+*-checkpoint.py
