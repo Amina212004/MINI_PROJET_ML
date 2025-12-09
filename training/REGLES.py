@@ -35,7 +35,7 @@ def is_type_prediction_rule(row):
 # -----------------------------
 # CORRECTION DE LA FONCTION filter_rules
 # -----------------------------
-def filter_rules(rules, df, years=None, mass_bins=None, continents=None):
+def filter_rules(rules, df, years=None, mass_bins=None, continents=None, strict=False):
     """
     CORRECTION: Ne pas utiliser issubset() qui est trop strict
     Cherche les règles qui contiennent AU MOINS UN des critères
@@ -75,18 +75,13 @@ def filter_rules(rules, df, years=None, mass_bins=None, continents=None):
 
     # CORRECTION PRINCIPALE: ne pas utiliser issubset() mais intersection()
     def match_criteria_corrected(antecedents):
-        """
-        CORRECTION: Une règle correspond si elle a AU MOINS UN critère utilisateur
-        (pas besoin d'avoir TOUS les critères)
-        """
+        ant_set = set(str(item) for item in antecedents)
         if not user_criteria:
             return True
-        
-        # Convertir antecedents en set de strings
-        ant_set = set(str(item) for item in antecedents)
-        
-        # Vérifier s'il y a AU MOINS UN critère en commun
-        return len(ant_set.intersection(user_criteria)) > 0
+        if strict:
+            return user_criteria.issubset(ant_set)
+        else:
+            return len(ant_set.intersection(user_criteria)) > 0
 
     # Appliquer le filtrage corrigé
     filtered = rules[rules['antecedents'].apply(match_criteria_corrected)]
@@ -170,10 +165,9 @@ def predict_missing_criteria(df, top_type, user_years=None, user_mass=None, user
 def get_type_info(df, top_type, user_years=None, user_mass=None, user_continents=None,
                   pred_year=None, pred_mass=None, pred_continent=None):
     df_type = df[df['recclass_clean'] == top_type].copy()
-    final_years = user_years
-    final_mass = user_mass
-    final_continents = user_continents if user_continents else ([pred_continent] if pred_continent else None)
 
+    # Années
+    final_years = user_years if user_years else pred_year
     if final_years:
         years_flat = []
         for y in final_years:
@@ -183,16 +177,23 @@ def get_type_info(df, top_type, user_years=None, user_mass=None, user_continents
                 years_flat.append(y)
         df_type = df_type[df_type['year'].isin(years_flat)]
 
+    # Masse
+    final_mass = user_mass if user_mass else pred_mass
     if final_mass:
         mass_mask = pd.Series(False, index=df_type.index)
-        for m in final_mass:
+        for m in final_mass if isinstance(final_mass, list) else [final_mass]:
             if isinstance(m, (list, tuple)) and len(m) == 2:
                 mass_mask |= df_type['mass_cleaned'].between(m[0], m[1])
             else:
                 mass_mask |= (df_type['mass_bin'] == m)
         df_type = df_type[mass_mask]
 
+    # CONTINENT : appliquer le continent prédit si l'utilisateur n'a rien donné
+    final_continents = user_continents if user_continents else pred_continent
     if final_continents:
+        # Si c'est une chaîne, transforme en liste
+        if isinstance(final_continents, str):
+            final_continents = [final_continents]
         df_type = df_type[df_type['continent'].isin(final_continents)]
 
     names = df_type['name'].tolist()
@@ -228,7 +229,7 @@ def get_rules_statistics(filtered_rules):
 # -----------------------------
 # Traitement d'une sélection utilisateur
 # -----------------------------
-def process_user_selection(sel, rules, df):
+
     """
     Traite la sélection utilisateur pour prédire le type de météorite
     et filtrer strictement les données selon les critères fournis.
@@ -243,58 +244,29 @@ def process_user_selection(sel, rules, df):
     Retourne :
         dict avec top_type, probabilité, noms, pays, valeurs prédites et stats
     """
+    
+def process_user_selection(sel, rules, df):
     # Récupérer les critères utilisateur
     years = sel.get('years') or []
     mass = sel.get('mass') or []
     continents = sel.get('continents') or []
 
-    # Filtrer les règles selon les critères
-    filtered_rules = filter_rules(rules, df, years, mass, continents)
+    filtered_rules_strict = filter_rules(rules, df, years, mass, continents, strict=True)
+    top_type, prob = get_most_probable_type(filtered_rules_strict, df)
 
-    # Déterminer le type le plus probable
-    top_type, prob = get_most_probable_type(filtered_rules, df)
+    # Prédire les critères manquants
+    year_pred, mass_pred, continent_pred = predict_missing_criteria(
+        df, top_type, years, mass, continents
+    )
 
-    # Filtrer le dataset selon le type et les critères utilisateur
-    df_type = df[df['recclass_clean'] == top_type].copy()
+    # Filtrer le dataset selon le type et les critères/prédictions
+    names, countries, sample_years, mass_bin, df_points = get_type_info(
+        df, top_type, years, mass, continents, year_pred, mass_pred, continent_pred
+    )
 
-    # Filtrage strict par années
-    if years:
-        years_flat = []
-        for y in years:
-            if isinstance(y, (list, tuple)) and len(y) == 2:
-                years_flat.extend(range(y[0], y[1] + 1))
-            else:
-                years_flat.append(y)
-        df_type = df_type[df_type['year'].isin(years_flat)]
-
-    # Filtrage strict par mass_bin
-    if mass:
-        mass_mask = pd.Series(False, index=df_type.index)
-        for m in mass:
-            if isinstance(m, (list, tuple)) and len(m) == 2:
-                mass_mask |= df_type['mass_cleaned'].between(m[0], m[1])
-            else:
-                mass_mask |= (df_type['mass_bin'] == m)
-        df_type = df_type[mass_mask]
-
-    # Filtrage strict par continents
-    if continents:
-        df_type = df_type[df_type['continent'].isin(continents)]
-
-    # Préparer les valeurs prédites si certaines entrées manquent
-    year_pred = years if years else (df_type['year_period'].mode().tolist() if not df_type.empty else [])
-    mass_pred = mass if mass else (df_type['mass_bin'].mode().tolist() if not df_type.empty else [])
-    continent_pred = continents if continents else (df_type['continent'].mode().tolist() if not df_type.empty else [])
-
-    # Extraire noms et pays filtrés
-    names = df_type['name'].tolist()
-    countries = df_type['country'].dropna().unique().tolist()
-    sample_years = df_type['year'].dropna().tolist()
-
-    # Retourner le résultat complet
     return {
         'selection': sel,
-        'filtered_rules': filtered_rules,
+        'filtered_rules': filtered_rules_strict,
         'top_type': top_type,
         'probability': prob,
         'year_pred': year_pred,
@@ -304,6 +276,7 @@ def process_user_selection(sel, rules, df):
         'countries': countries,
         'sample_years': sample_years
     }
+    
 
 
 

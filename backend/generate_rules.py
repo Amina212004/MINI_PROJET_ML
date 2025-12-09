@@ -25,13 +25,13 @@ df_encoded = pd.get_dummies(df_small).astype(bool)
 # Calculer itemsets fréquents
 # -----------------------------
 # Support minimal raisonnable pour éviter règles trop rares
-frequent_itemsets = apriori(df_encoded, min_support=0.01, use_colnames=True)
+frequent_itemsets = apriori(df_encoded, min_support=0.005, use_colnames=True)
 
 # -----------------------------
 # Générer règles d'association
 # -----------------------------
 # min_threshold peut être ajusté pour garder plus ou moins de règles
-rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.5)
+rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.2)
 
 # -----------------------------
 # Ajouter colonnes utiles pour filtrage
