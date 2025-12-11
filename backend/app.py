@@ -8,7 +8,7 @@ from REGLES import process_user_selection
 app = Flask(__name__)
 
 # Dataset
-dataset_path = os.path.join(os.path.dirname(__file__), '../data/meteorites_final.csv')
+dataset_path = os.path.join(os.path.dirname(__file__), '../data/meteorites_final_rebalanced.csv')
 df = pd.read_csv(dataset_path)
 
 # Règles
@@ -27,16 +27,27 @@ def predict():
         }
 
         result = process_user_selection(sel, rules, df)
-        return jsonify({
+        
+        # Construire la réponse de base
+        response = {
             "top_type": result["top_type"],
             "probability": result["probability"],
-            "predicted_years": result["year_pred"],
-            "predicted_mass": result["mass_pred"],
-            "predicted_continent": result["continent_pred"],
             "names": result["names"],
             "countries": result["countries"],
             "sample_years": result["sample_years"]
-        })
+        }
+        
+        # N'ajouter les prédictions que si elles existent (= l'utilisateur ne les a pas fournies)
+        if "predicted_years" in result:
+            response["predicted_years"] = result["predicted_years"]
+        
+        if "predicted_mass" in result:
+            response["predicted_mass"] = result["predicted_mass"]
+        
+        if "predicted_continent" in result:
+            response["predicted_continent"] = result["predicted_continent"]
+        
+        return jsonify(response)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
