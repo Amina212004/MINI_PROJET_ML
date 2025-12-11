@@ -58,7 +58,7 @@ def show_prediction_tool():
         }
         try:
             # Replace 'http://localhost:5000' with actual backend URL if deployed
-            response = requests.post("http://localhost:5000/predict", json=payload)
+            response = requests.post("http://localhost:5001/predict", json=payload)
             response.raise_for_status()
             result = response.json()
         except Exception as e:
