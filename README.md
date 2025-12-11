@@ -341,13 +341,7 @@ max_rules_per_type = 50   # Équilibrage des types
 - **Folium** - Visualisation cartographique
 - **NumPy** - Calculs numériques
 
----
 
-## 👥 Auteurs
-
-- **Amina** - [@Amina212004](https://github.com/Amina212004)
-
----
 
 ## 📄 License
 
@@ -365,4 +359,5 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 <p align="center">
   <i>Fait avec ❤️ pour le Mini Projet ML - IASD 2024/2025</i>
 </p>
+
 
