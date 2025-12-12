@@ -1,3 +1,5 @@
 Flask>=2.3
 flask-cors>=3.0
 pandas>=2.3
+folium>=0.18.0
+mlxtend>=0.23.4
