@@ -7,7 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../training'))
 from REGLES import process_user_selection
 
 app = Flask(__name__)
-CORS(app, resources={r"/predict": {"origins": "https://mini-projet-ml-7rtndqgosqmj2f2c8g8uvh.streamlit.app"}})
+CORS(app)
 
 # Dataset
 dataset_path = os.path.join(os.path.dirname(__file__), '../data/meteorites_final_rebalanced.csv')
@@ -17,10 +17,6 @@ df = pd.read_csv(dataset_path)
 rules_path = os.path.join(os.path.dirname(__file__), 'rules.pkl')
 with open(rules_path, 'rb') as f:
     rules = pickle.load(f)
-    
-@app.route("/", methods=["GET"])
-def home():
-    return "Backend is running!"
 
 @app.route("/predict", methods=["POST"])
 def predict():

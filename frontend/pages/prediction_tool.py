@@ -407,7 +407,7 @@ def show_prediction_tool():
             
             try:
                 # Call backend
-                response = requests.post("https://mini-projet-ml-e264.onrender.com/predict", 
+                response = requests.post("http://localhost:5001/predict", 
                                         json=payload, timeout=10)
                 
                 if response.status_code == 200:
