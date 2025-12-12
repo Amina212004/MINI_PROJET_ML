@@ -7,7 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../training'))
 from REGLES import process_user_selection
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/predict": {"origins": "https://mini-projet-ml-7rtndqgosqmj2f2c8g8uvh.streamlit.app"}})
 
 # Dataset
 dataset_path = os.path.join(os.path.dirname(__file__), '../data/meteorites_final_rebalanced.csv')
