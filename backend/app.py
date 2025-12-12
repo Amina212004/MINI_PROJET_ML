@@ -17,6 +17,10 @@ df = pd.read_csv(dataset_path)
 rules_path = os.path.join(os.path.dirname(__file__), 'rules.pkl')
 with open(rules_path, 'rb') as f:
     rules = pickle.load(f)
+    
+@app.route("/", methods=["GET"])
+def home():
+    return "Backend is running!"
 
 @app.route("/predict", methods=["POST"])
 def predict():
