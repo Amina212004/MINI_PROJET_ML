@@ -1,6 +1,6 @@
 import requests
 
-url = "http://127.0.0.1:5001/predict"
+url = "https://mini-projet-ml-e264.onrender.com/predict"
 
 # Format recommandé pour les intervalles d'années: [start, end]
 data =  {"years": None, "mass": ["1-10g"], "continents": None}
