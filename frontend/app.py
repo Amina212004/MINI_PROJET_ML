@@ -217,9 +217,14 @@ with st.sidebar:
     # Animated title
     st.markdown("""
     <div class="sidebar-title">
-        🌠 Meteorite<br>Predictor
+         Meteorite<br>Predictor
     </div>
     """, unsafe_allow_html=True)
+    
+    # Add logo/icon image centered
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("./image2.png", width=90, use_container_width=False)
     
     st.markdown("---")
     

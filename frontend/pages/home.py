@@ -2,7 +2,7 @@
 import streamlit as st
 
 def show_home():
-    st.markdown("# 🌠 Welcome to Meteorite Type Predictor")
+    st.markdown("#  Welcome to Meteorite Type Predictor")
     
     # Hero section
     st.markdown("""
@@ -53,7 +53,7 @@ def show_home():
         """, unsafe_allow_html=True)
     
     # How to use section
-    st.markdown("## 📖 How to Use")
+    st.markdown("##  How to Use")
     
     steps = [
         ("1️⃣", "Go to **Prediction Tool** page", "#667eea"),
@@ -75,7 +75,7 @@ def show_home():
         """, unsafe_allow_html=True)
     
     # Quick start buttons
-    st.markdown("## 🎮 Quick Start")
+    st.markdown("##  Quick Start")
     
     col_start1, col_start2, col_start3 = st.columns(3)
     

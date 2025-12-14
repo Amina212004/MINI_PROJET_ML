@@ -186,7 +186,7 @@ def get_type_color(meteorite_type, color_palette):
     return color_palette[color_index]
 
 def show_statistics():
-    st.title("📈 Advanced Statistics Dashboard")
+    st.title("Advanced Statistics Dashboard")
     
     # Import color palette from prediction_tool if available
     COLOR_PALETTE = [
