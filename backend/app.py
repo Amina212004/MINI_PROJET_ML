@@ -38,7 +38,7 @@ def predict():
             "sample_years": result["sample_years"]
         }
         
-        # N'ajouter les prédictions que si elles existent
+        # Toujours ajouter les prédictions - elles ne seront jamais None
         if "predicted_years" in result:
             response["predicted_years"] = result["predicted_years"]
         if "predicted_mass" in result:

@@ -194,7 +194,7 @@ def get_most_probable_type(filtered_rules, df):
 def predict_missing_criteria(df, top_type, user_years=None, user_mass=None, user_continents=None):
     """
     Prédit les critères manquants basés sur le type de météorite.
-    Retourne toujours des listes pour la cohérence.
+    Ne retourne JAMAIS None - utilise des fallbacks sur le dataset global.
     """
     df_type = df[df['recclass_clean'] == top_type].copy()
     
@@ -214,7 +214,9 @@ def predict_missing_criteria(df, top_type, user_years=None, user_mass=None, user
                     years_flat.extend(range(int(y[0]), int(y[1]) + 1))
                 else:
                     years_flat.append(int(y) if isinstance(y, float) else y)
-        df_type = df_type[df_type['year'].isin(years_flat)]
+        df_filtered = df_type[df_type['year'].isin(years_flat)]
+        if not df_filtered.empty:
+            df_type = df_filtered
     
     # Filtrer par masse si fournie
     if user_mass:
@@ -225,35 +227,58 @@ def predict_missing_criteria(df, top_type, user_years=None, user_mass=None, user
                 mass_mask |= df_type['mass_cleaned'].between(m[0], m[1])
             else:
                 mass_mask |= (df_type['mass_bin'] == m)
-        df_type = df_type[mass_mask]
+        df_filtered = df_type[mass_mask]
+        if not df_filtered.empty:
+            df_type = df_filtered
     
     # Filtrer par continents si fournis
     if user_continents:
         cont_list = user_continents if isinstance(user_continents, list) else [user_continents]
-        df_type = df_type[df_type['continent'].isin(cont_list)]
+        df_filtered = df_type[df_type['continent'].isin(cont_list)]
+        if not df_filtered.empty:
+            df_type = df_filtered
     
-    # Prédictions - toujours retourner des listes normalisées
+    # PRÉDICTION DES ANNÉES - Ne jamais retourner None
     if user_years:
         year_pred = user_years
     elif not df_type.empty:
-        # Retourner la période la plus fréquente
         year_pred = df_type['year_period'].mode()[0]
     else:
-        year_pred = None
+        # Fallback: utiliser le dataset global pour ce type
+        df_fallback = df[df['recclass_clean'] == top_type]
+        if not df_fallback.empty:
+            year_pred = df_fallback['year_period'].mode()[0]
+        else:
+            # Fallback ultime: utiliser tout le dataset
+            year_pred = df['year_period'].mode()[0]
     
+    # PRÉDICTION DE LA MASSE - Ne jamais retourner None
     if user_mass:
         mass_pred = user_mass if isinstance(user_mass, list) else [user_mass]
     elif not df_type.empty:
         mass_pred = [df_type['mass_bin'].mode()[0]]
     else:
-        mass_pred = None
+        # Fallback: utiliser le dataset global pour ce type
+        df_fallback = df[df['recclass_clean'] == top_type]
+        if not df_fallback.empty:
+            mass_pred = [df_fallback['mass_bin'].mode()[0]]
+        else:
+            # Fallback ultime: utiliser tout le dataset
+            mass_pred = [df['mass_bin'].mode()[0]]
     
+    # PRÉDICTION DU CONTINENT - Ne jamais retourner None
     if user_continents:
         continent_pred = user_continents if isinstance(user_continents, list) else [user_continents]
     elif not df_type.empty:
         continent_pred = [df_type['continent'].mode()[0]]
     else:
-        continent_pred = None
+        # Fallback: utiliser le dataset global pour ce type
+        df_fallback = df[df['recclass_clean'] == top_type]
+        if not df_fallback.empty:
+            continent_pred = [df_fallback['continent'].mode()[0]]
+        else:
+            # Fallback ultime: utiliser tout le dataset
+            continent_pred = [df['continent'].mode()[0]]
 
     return year_pred, mass_pred, continent_pred
 
