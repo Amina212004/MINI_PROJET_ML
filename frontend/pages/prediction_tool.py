@@ -419,11 +419,59 @@ def show_prediction_tool():
         
         # MODIFICATION 1 & 4: Masse peut être vide (None) OU une catégorie sélectionnée
         mass_input_option = st.radio("**Mass Input Mode:**", 
-                                    ["⚖️ Select mass category", 
+                                    ["⚖️ Enter mass value", 
+                                     "📊 Select mass category",
                                      "🤖 Let AI predict mass (leave empty)"], 
                                     horizontal=True)
         
-        if mass_input_option == "⚖️ Select mass category":
+        if mass_input_option == "⚖️ Enter mass value":
+            # Sélection de l'unité et de la valeur
+            col_unit, col_value = st.columns([1, 2])
+            
+            with col_unit:
+                mass_unit = st.selectbox(
+                    "Unit:",
+                    options=["g", "kg"],
+                    help="Select the unit of mass"
+                )
+            
+            with col_value:
+                if mass_unit == "g":
+                    mass_value = st.number_input(
+                        "Mass value:",
+                        min_value=0.001,
+                        max_value=1000000.0,
+                        value=100.0,
+                        step=1.0,
+                        format="%.3f",
+                        help="Enter mass in grams (0.001g to 1,000,000g)"
+                    )
+                    mass_in_grams = mass_value
+                else:  # kg
+                    mass_value = st.number_input(
+                        "Mass value:",
+                        min_value=0.000001,
+                        max_value=1000.0,
+                        value=0.1,
+                        step=0.1,
+                        format="%.6f",
+                        help="Enter mass in kilograms (0.000001kg to 1000kg)"
+                    )
+                    mass_in_grams = mass_value * 1000  # Convertir en grammes
+            
+            if mass_in_grams > 0:
+                # Convertir la masse en catégorie d'intervalle
+                mass_interval, mass_category_name = convert_mass_to_interval(mass_in_grams)
+                mass_payload = [mass_interval]
+                mass_display = f"{mass_value:.3f} {mass_unit} → {mass_interval} ({mass_category_name})"
+                mass_provided = True
+            else:
+                mass_payload = None
+                mass_display = "Not provided"
+                mass_provided = False
+                st.info("💡 **Enter a value > 0 to specify mass**")
+                
+        elif mass_input_option == "📊 Select mass category":
             # Options de catégories de masse
             mass_categories = {
                 "<1g": "Très petit ",
@@ -448,7 +496,30 @@ def show_prediction_tool():
             mass_payload = None
             mass_display = "AI Predicted"
             mass_provided = False
+        
+        # Afficher un guide d'information pour la masse
+        with st.expander("📋 Mass Input Guide"):
+            st.markdown("""
+            **Plages de masse acceptées:**
             
+            - En grammes (g): 0.001g à 1,000,000g (1000kg)
+            - En kilogrammes (kg): 0.000001kg (0.001g) à 1000kg
+            
+            **Exemples:**
+            - Très petite météorite: 0.001g (1 milligramme)
+            - Petite météorite: 10g
+            - Moyenne météorite: 500g
+            - Grande météorite: 5kg (5000g)
+            - Très grande météorite: 100kg (100,000g)
+            
+            **Catégories automatiques:**
+            - < 1g : Très petit
+            - 1-10g : Petit
+            - 10-100g : Moyen
+            - 100g-1kg : Grand
+            - 1-10kg : Très grand
+            - >10kg : Extra large
+            """)
        
         
         # Advanced options expander

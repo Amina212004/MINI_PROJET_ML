@@ -1,0 +1,18 @@
+{
+  "apriori": {
+    "time": 0.5228040218353271,
+    "num_itemsets": 894,
+    "num_rules": 415,
+    "avg_confidence": 0.8131575962288004,
+    "avg_lift": 2.5821770799047608
+  },
+  "fpgrowth": {
+    "time": 52.77172565460205,
+    "num_itemsets": 894,
+    "num_rules": 415,
+    "avg_confidence": 0.8131575962288004,
+    "avg_lift": 2.5821770799047608
+  },
+  "chosen_algorithm": "Apriori",
+  "reason": "Qualit\u00e9 identique, meilleure interpr\u00e9tabilit\u00e9 et facilit\u00e9 de maintenance"
+}

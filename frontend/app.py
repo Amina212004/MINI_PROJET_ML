@@ -224,7 +224,9 @@ with st.sidebar:
     # Add logo/icon image centered
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image("./image2.png", width=90, use_container_width=False)
+        import os
+        image_path = os.path.join(os.path.dirname(__file__), "image2.png")
+        st.image(image_path, width=90)
     
     st.markdown("---")
     

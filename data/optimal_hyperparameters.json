@@ -1,0 +1,15 @@
+{
+  "min_support": 0.0001,
+  "min_confidence": 0.6,
+  "min_lift": 1.0,
+  "justification": {
+    "support": "Permet couverture 100% des types et capture des cas rares",
+    "confidence": "\u00c9quilibre optimal entre fiabilit\u00e9 (0.81 avg) et couverture",
+    "lift": "Garantit significativit\u00e9 statistique (2.58 avg)"
+  },
+  "results": {
+    "types_covered": "12/12 (100%)",
+    "avg_confidence": 0.81,
+    "avg_lift": 2.58
+  }
+}
