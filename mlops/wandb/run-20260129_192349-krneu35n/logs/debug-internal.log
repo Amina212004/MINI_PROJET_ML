@@ -1,0 +1,13 @@
+{"time":"2026-01-29T19:23:50.09325+01:00","level":"INFO","msg":"stream: starting","core version":"0.24.0"}
+{"time":"2026-01-29T19:23:50.547679+01:00","level":"INFO","msg":"stream: created new stream","id":"krneu35n"}
+{"time":"2026-01-29T19:23:50.547923+01:00","level":"INFO","msg":"writer: started","stream_id":"krneu35n"}
+{"time":"2026-01-29T19:23:50.547983+01:00","level":"INFO","msg":"handler: started","stream_id":"krneu35n"}
+{"time":"2026-01-29T19:23:50.548085+01:00","level":"INFO","msg":"stream: started","id":"krneu35n"}
+{"time":"2026-01-29T19:23:50.548204+01:00","level":"INFO","msg":"sender: started","stream_id":"krneu35n"}
+{"time":"2026-01-29T19:23:53.258442+01:00","level":"WARN","msg":"sender: sendUseArtifact: job builder disabled, skipping"}
+{"time":"2026-01-29T19:23:55.199395+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2026-01-29T19:23:55.462263+01:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2026-01-29T19:23:55.467368+01:00","level":"INFO","msg":"stream: closing","id":"krneu35n"}
+{"time":"2026-01-29T19:23:55.467418+01:00","level":"INFO","msg":"handler: closed","stream_id":"krneu35n"}
+{"time":"2026-01-29T19:23:55.467539+01:00","level":"INFO","msg":"sender: closed","stream_id":"krneu35n"}
+{"time":"2026-01-29T19:23:55.467556+01:00","level":"INFO","msg":"stream: closed","id":"krneu35n"}

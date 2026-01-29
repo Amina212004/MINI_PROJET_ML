@@ -1,0 +1,20 @@
+📥 Chargement des données...
+⚠️ Pas de fichier local. Téléchargement depuis WandB...
+[34m[1mwandb[0m:   2 of 2 files downloaded.  
+📂 Fichiers dans l'artefact : ['test.csv', 'train.csv']
+
+⚠️ ALERTE : Aucun fichier valide trouvé. Génération de données simulées pour la démo...
+✅ Données simulées générées (Mode Dégradé).
+📊 Données prêtes : (1000, 4)
+⚙️ Entraînement...
+📉 Simulation Drift...
+   -> Bruit: 0.0% | Accuracy: 0.78
+   -> Bruit: 10.0% | Accuracy: 0.77
+   -> Bruit: 20.0% | Accuracy: 0.78
+   -> Bruit: 30.0% | Accuracy: 0.78
+   -> Bruit: 40.0% | Accuracy: 0.77
+   -> Bruit: 50.0% | Accuracy: 0.77
+   -> Bruit: 60.0% | Accuracy: 0.77
+   -> Bruit: 70.0% | Accuracy: 0.76
+   -> Bruit: 80.0% | Accuracy: 0.76
+✅ Terminé ! Va voir WandB.

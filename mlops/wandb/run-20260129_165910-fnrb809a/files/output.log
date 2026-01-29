@@ -1,0 +1,6 @@
+📥 Téléchargement du modèle depuis : meriemkhedir/MINI_PROJET_ML-mlops/model-registry-meteorites:production
+[34m[1mwandb[0m:   1 of 1 files downloaded.
+
+✅ Modèle chargé avec succès !
+🧠 Type de modèle : <class 'sklearn.ensemble._forest.RandomForestClassifier'>
+🚀 Le système est prêt à faire des prédictions (Inférence).

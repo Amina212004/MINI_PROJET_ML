@@ -1,0 +1,4 @@
+📥 Récupération des données...
+[34m[1mwandb[0m:   2 of 2 files downloaded.  
+🌲 Training RF: n_estimators=100, max_depth=None
+📈 Résultats -> Accuracy: 0.2172, F1: 0.1824

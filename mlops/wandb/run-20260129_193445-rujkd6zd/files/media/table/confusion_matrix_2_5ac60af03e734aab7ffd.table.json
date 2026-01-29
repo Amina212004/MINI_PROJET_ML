@@ -1,0 +1,1 @@
+{"columns": ["Predicted", "Actual", "Count"], "data": [["Non-Dangereux", "Non-Dangereux", 300], ["Non-Dangereux", "Dangereux", 2], ["Dangereux", "Non-Dangereux", 17], ["Dangereux", "Dangereux", 81]]}

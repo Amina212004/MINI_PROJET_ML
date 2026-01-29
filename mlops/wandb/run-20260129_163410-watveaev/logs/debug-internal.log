@@ -1,0 +1,11 @@
+{"time":"2026-01-29T16:34:11.050306+01:00","level":"INFO","msg":"stream: starting","core version":"0.24.0"}
+{"time":"2026-01-29T16:34:12.162004+01:00","level":"INFO","msg":"stream: created new stream","id":"watveaev"}
+{"time":"2026-01-29T16:34:12.162073+01:00","level":"INFO","msg":"handler: started","stream_id":"watveaev"}
+{"time":"2026-01-29T16:34:12.162259+01:00","level":"INFO","msg":"stream: started","id":"watveaev"}
+{"time":"2026-01-29T16:34:12.162265+01:00","level":"INFO","msg":"writer: started","stream_id":"watveaev"}
+{"time":"2026-01-29T16:34:12.16227+01:00","level":"INFO","msg":"sender: started","stream_id":"watveaev"}
+{"time":"2026-01-29T16:34:15.980544+01:00","level":"INFO","msg":"stream: closing","id":"watveaev"}
+{"time":"2026-01-29T16:34:17.101037+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2026-01-29T16:34:17.52057+01:00","level":"INFO","msg":"handler: closed","stream_id":"watveaev"}
+{"time":"2026-01-29T16:34:17.521757+01:00","level":"INFO","msg":"sender: closed","stream_id":"watveaev"}
+{"time":"2026-01-29T16:34:17.521832+01:00","level":"INFO","msg":"stream: closed","id":"watveaev"}

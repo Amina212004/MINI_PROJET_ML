@@ -1,0 +1,49 @@
+_wandb:
+    value:
+        cli_version: 0.24.0
+        e:
+            kwbmgt6ckk02eqmtdp7f8tzar7lngvq7:
+                apple:
+                    ecpuCores: 4
+                    gpuCores: 8
+                    memoryGb: 8
+                    name: Apple M2
+                    pcpuCores: 4
+                    ramTotalBytes: "8589934592"
+                    swapTotalBytes: "4294967296"
+                codePath: mlops/04_predict.py
+                codePathLocal: 04_predict.py
+                cpu_count: 8
+                cpu_count_logical: 8
+                disk:
+                    /:
+                        total: "245107195904"
+                        used: "220155199488"
+                email: i.soummar@esi-sba.dz
+                executable: /Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/bin/python
+                git:
+                    commit: 3069b998b1f28d105caa6191479224c87de35ff2
+                    remote: https://github.com/Amina212004/MINI_PROJET_ML.git
+                host: Macs-MacBook-Air-2.local
+                memory:
+                    total: "8589934592"
+                os: macOS-14.7-arm64-arm-64bit-Mach-O
+                program: /Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops/04_predict.py
+                python: CPython 3.13.2
+                root: /Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops
+                startedAt: "2026-01-29T15:59:10.108236Z"
+                writerId: kwbmgt6ckk02eqmtdp7f8tzar7lngvq7
+        m: []
+        python_version: 3.13.2
+        t:
+            "1":
+                - 53
+            "2":
+                - 5
+                - 53
+            "3":
+                - 2
+            "4": 3.13.2
+            "5": 0.24.0
+            "12": 0.24.0
+            "13": darwin-arm64

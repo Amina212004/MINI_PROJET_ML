@@ -1,0 +1,17 @@
+📥 Chargement des données...
+⚠️ Mode DÉMO activé : Génération de données idéales pour la présentation.
+📊 Données DÉMO prêtes : (2000, 5)
+   Répartition : hazardous
+0    0.7475
+1    0.2525
+Name: proportion, dtype: float64
+⚙️ Entraînement...
+📉 Simulation Drift...
+   -> Bruit: 0.0 | F1 Score: 0.90
+   -> Bruit: 0.5 | F1 Score: 0.50
+   -> Bruit: 1.0 | F1 Score: 0.44
+   -> Bruit: 1.5 | F1 Score: 0.47
+   -> Bruit: 2.0 | F1 Score: 0.48
+   -> Bruit: 3.0 | F1 Score: 0.47
+   -> Bruit: 4.0 | F1 Score: 0.47
+✅ Terminé ! Va voir tes GRAPHES PARFAITS sur WandB.

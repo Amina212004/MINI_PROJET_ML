@@ -1,0 +1,42 @@
+{
+  "os": "macOS-14.7-arm64-arm-64bit-Mach-O",
+  "python": "CPython 3.13.2",
+  "startedAt": "2026-01-29T15:42:01.700874Z",
+  "args": [
+    "--max_depth=20",
+    "--min_samples_split=5",
+    "--n_estimators=100"
+  ],
+  "program": "/Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops/02_train.py",
+  "codePath": "mlops/02_train.py",
+  "codePathLocal": "02_train.py",
+  "git": {
+    "remote": "https://github.com/Amina212004/MINI_PROJET_ML.git",
+    "commit": "3069b998b1f28d105caa6191479224c87de35ff2"
+  },
+  "email": "i.soummar@esi-sba.dz",
+  "root": "/Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops",
+  "host": "Macs-MacBook-Air-2.local",
+  "executable": "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/bin/python",
+  "cpu_count": 8,
+  "cpu_count_logical": 8,
+  "disk": {
+    "/": {
+      "total": "245107195904",
+      "used": "220123037696"
+    }
+  },
+  "memory": {
+    "total": "8589934592"
+  },
+  "apple": {
+    "name": "Apple M2",
+    "ecpuCores": 4,
+    "pcpuCores": 4,
+    "gpuCores": 8,
+    "memoryGb": 8,
+    "swapTotalBytes": "4294967296",
+    "ramTotalBytes": "8589934592"
+  },
+  "writerId": "qclpkwyln4zv9yn7hhd2ec7dr2wiy2vd"
+}

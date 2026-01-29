@@ -1,0 +1,61 @@
+📥 Chargement des données...
+[34m[1mwandb[0m:   2 of 2 files downloaded.  
+❌ Erreur WandB : [Errno 2] No such file or directory: '/Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops/artifacts/meteorite_dataset:v0/meteorite_data_cleaned.csv'
+⚠️ Tentative de chargement local...
+Traceback (most recent call last):
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops/05_monitoring_analysis.py", line 34, in <module>
+    df = pd.read_csv(f"{artifact_dir}/meteorite_data_cleaned.csv")
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops/artifacts/meteorite_dataset:v0/meteorite_data_cleaned.csv'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops/05_monitoring_analysis.py", line 39, in <module>
+    df = pd.read_csv("meteorite_data_cleaned.csv")
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'meteorite_data_cleaned.csv'

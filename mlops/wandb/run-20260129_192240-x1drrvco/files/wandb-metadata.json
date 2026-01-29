@@ -1,0 +1,17 @@
+{
+  "os": "macOS-14.7-arm64-arm-64bit-Mach-O",
+  "python": "CPython 3.13.2",
+  "startedAt": "2026-01-29T18:22:40.649216Z",
+  "program": "/Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops/05_monitoring_analysis.py",
+  "codePath": "mlops/05_monitoring_analysis.py",
+  "codePathLocal": "05_monitoring_analysis.py",
+  "git": {
+    "remote": "https://github.com/Amina212004/MINI_PROJET_ML.git",
+    "commit": "3069b998b1f28d105caa6191479224c87de35ff2"
+  },
+  "email": "i.soummar@esi-sba.dz",
+  "root": "/Users/mac/Documents/GitHub/MINI_PROJET_ML/mlops",
+  "host": "Macs-MacBook-Air-2.local",
+  "executable": "/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/bin/python",
+  "writerId": "wiygc4ciw3bm6r9atufbylk7uv21binq"
+}

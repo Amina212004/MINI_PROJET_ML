@@ -1,0 +1,23 @@
+📥 Chargement des données...
+⚠️ Génération de données simulées pour l'Association Rules...
+🔄 Transformation des données en catégories...
+Aperçu des catégories :
+    Mass_Level     Hazard           Era
+0  Mass_Medium       Safe        Modern
+1   Mass_Small       Safe  20th_Century
+2  Mass_Medium       Safe  20th_Century
+3   Mass_Large  Hazardous  20th_Century
+4   Mass_Small       Safe        Modern
+🕵️ Recherche des items fréquents (Apriori)...
+✅ Trouvé 24 groupes fréquents.
+📜 Génération des règles d'association...
+Top 5 Règles :
+                                 antecedents       consequents  support  confidence      lift
+11                     Mass_Level_Mass_Large  Era_20th_Century    0.120    0.857143  1.021624
+17        Mass_Level_Mass_Small, Hazard_Safe  Era_20th_Century    0.120    0.857143  1.021624
+12                          Hazard_Hazardous  Era_20th_Century    0.251    0.853741  1.017570
+2                      Mass_Level_Mass_Small  Era_20th_Century    0.163    0.848958  1.011869
+23  Hazard_Hazardous, Mass_Level_Mass_Medium  Era_20th_Century    0.172    0.847291  1.009882
+/Users/mac/Documents/GitHub/MINI_PROJET_ML/venv/lib/python3.13/site-packages/wandb/analytics/sentry.py:279: DeprecationWarning: The `Scope.user` setter is deprecated in favor of `Scope.set_user()`.
+  self.scope.user = {"email": email}
+✅ Terminé ! Va voir tes règles sur WandB.
